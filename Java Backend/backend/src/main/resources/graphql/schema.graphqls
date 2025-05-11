@@ -1,0 +1,67 @@
+type Query{
+        # Obtener todos los usuarios (solo ADMIN) ok
+        getUsers: [UserDTO]
+
+    # Obtener un usuario específico por ID (solo ADMIN)
+    getUser(id: ID!): UserDTO
+
+    # Obtener todos los posts públicos sin autenticación
+    getPosts: [PostDTO]
+
+    getPublicPosts: [PostDTO]
+
+    # Obtener posts por usuario autenticado
+    getMyPosts: [PostDTO]
+
+    # Obtener un post específico por ID
+    getPost(postId: ID!): PostDTO
+
+}
+
+type Mutation {
+    # Registro de usuario
+    register(username: String!, password: String!): AuthResponse
+
+    # Login de usuario
+    login(username: String!, password: String!): AuthResponse
+
+    # Crear un post (usuario autenticado) ()
+    createPost(title: String!, content: String!, isPublic: Boolean!): PostDTO
+
+    # Editar un post (usuario autenticado solo sus propios posts)
+    editPost(postId: ID!, title: String, content: String, isPublic: Boolean!): PostDTO
+
+    # Eliminar un post (usuario autenticado solo sus propios posts)
+    deletePost(postId: ID!): Boolean
+
+    # Crear un usuario (solo ADMIN)
+    createUser(username: String!, password: String!, role: String!): UserDTO
+
+    # Editar un usuario (solo ADMIN)
+    editUser(id: ID!, username: String, password: String, role: String): UserDTO
+
+    # Eliminar un usuario (solo ADMIN)
+    deleteUser(id: ID!): Boolean
+
+    # Refrescar el token de acceso (requiere el refreshToken)
+    refreshToken(refreshToken: String!): AuthResponse
+}
+
+type AuthResponse{
+    token: String
+    refreshToken: String
+    message: String
+}
+
+type UserDTO{
+    id: ID!
+    username: String!
+    role: String!
+}
+
+type PostDTO{
+    id: ID!
+    title: String!
+    content: String!
+    user: UserDTO!
+}

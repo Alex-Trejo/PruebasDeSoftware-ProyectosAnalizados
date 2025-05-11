@@ -1,0 +1,8 @@
+<div class="full-container">
+    <h1 class="title">Public Posts</h1>
+    <div class="post-grid">
+        <div *ngFor="let post of posts" class="post-card">
+            <app-posts [post]="post"></app-posts>
+        </div>
+    </div>
+</div>

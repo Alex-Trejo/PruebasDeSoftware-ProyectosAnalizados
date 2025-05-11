@@ -1,0 +1,10 @@
+<div class="card">
+    <p-card [header]="username" >
+        <p class="m-0">
+            {{ role}}
+        </p>
+        <p-button *ngIf="editable" label="Edit" icon="pi pi-pencil" (onClick)="editThisUser()"></p-button>
+        <p-button *ngIf="editable" label="Delete" icon="pi pi-trash" (onClick)="deleteThisUser()"></p-button>
+    </p-card>
+
+</div>

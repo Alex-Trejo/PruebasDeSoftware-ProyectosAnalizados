@@ -1,0 +1,16 @@
+/* Ellipse.module.css */
+.ellipse {
+    box-sizing: border-box;
+    background: linear-gradient(
+      180deg,
+      rgba(251, 3, 245, 1) 0%,
+      rgba(170, 156, 255, 1) 100%
+    );
+    border-radius: 50%;
+    height: 636.58px;
+    position: relative;
+    transform-origin: 0 0;
+    transform: rotate(76.66deg) scale(1, 1);
+    filter: blur(94.71px);
+  }
+  

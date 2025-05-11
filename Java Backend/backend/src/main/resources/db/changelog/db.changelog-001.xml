@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Primer conjunto de cambios -->
+    <changeSet id="1" author="alex">
+        <createTable tableName="users">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="username" type="varchar(255)" >
+                    <constraints unique="true"/>
+            </column>
+            <column name="password" type="varchar(255)" />
+            <column name="role" type="varchar(50)" />
+        </createTable>
+
+        <createTable tableName="posts">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="title" type="varchar(255)" />
+            <column name="content" type="text" />
+            <column name="user_id" type="bigint" >
+                <constraints foreignKeyName="fk_post_user" references="users(id)"/>
+            </column>
+            <column name="is_public" type="boolean" defaultValueBoolean="false" />
+        </createTable>
+    </changeSet>
+
+    <!-- Insertar datos iniciales -->
+    <changeSet id="7" author="trejo" >
+        <insert tableName="users">
+            <column name="username" value="ADMIN"/>
+            <column name="password" value="admin123"/> <!-- Usa un hash en producción -->
+            <column name="role" value="ADMIN"/>
+        </insert>
+
+        <insert tableName="users">
+            <column name="username" value="user1"/>
+            <column name="password" value="user123"/> <!-- Usa un hash en producción -->
+            <column name="role" value="USER"/>
+        </insert>
+
+        <insert tableName="posts">
+            <column name="title" value="Primer Post"/>
+            <column name="content" value="Este es el primer post del sistema"/>
+            <column name="user_id" value="6"/>
+            <column name="is_public" valueBoolean="true"/>
+        </insert>
+
+        <insert tableName="posts">
+            <column name="title" value="Post Privado"/>
+            <column name="content" value="Este es un post privado"/>
+            <column name="user_id" value="6"/>
+            <column name="is_public" valueBoolean="false"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

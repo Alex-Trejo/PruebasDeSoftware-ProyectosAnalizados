@@ -1,0 +1,49 @@
+<div class="full-container">
+
+    <!-- Encabezado -->
+    <div class="header-container">
+        <p-button label="New Post" icon="pi pi-plus" (onClick)="showDialogToAdd()"></p-button>
+        <h2 class="title">Your posts</h2>
+    </div>
+    
+    <!-- Contenedor de Posts -->
+    <div class="post-grid">
+        <div *ngFor="let post of posts" class="post-card">
+            <app-posts [post]="post" [editable]="true" (deletePost)="deletePost($event)" (editPost)="editPost($event)"></app-posts>
+        </div>
+    </div>
+    
+    <!-- Diálogo (Modal) para agregar o editar un post -->
+    <p-dialog header="Add new post" [modal]="true" [(visible)]="visible">
+        <div class="modal-content">
+            
+            <div class="field">
+                <label for="">Is public</label>
+                <p-toggleswitch [(ngModel)]="checked" />
+            </div>
+                
+            <div class="field">
+                <p-floatlabel>
+                    <input pInputText id="title" type="text" autocomplete="off" [(ngModel)]="title" />
+                    <label for="title">
+                        <i class="pi pi-book"></i>
+                        Title
+                    </label>
+                </p-floatlabel>
+            </div>
+                
+            <div class="field">
+                <p-floatlabel>
+                    <textarea pInputTextarea id="body" rows="5" [(ngModel)]="body"></textarea>
+                    <label for="body">
+                        <i class="pi pi-pencil"></i>
+                        Your text
+                    </label>
+                </p-floatlabel>
+            </div>
+                
+            <p-button label="Save" icon="pi pi-save" (onClick)="savePost()"></p-button>
+        </div>
+    </p-dialog>
+
+</div>

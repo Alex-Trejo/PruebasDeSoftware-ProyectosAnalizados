@@ -1,0 +1,11 @@
+<div class="card">
+    
+    <p-card [header]="title" >
+        <p class="m-0">
+            {{ content}}
+        </p>
+        <p-button *ngIf="editable" label="Edit" icon="pi pi-pencil" (onClick)="editThisPost()"></p-button>
+        <p-button *ngIf="editable" label="Delete" icon="pi pi-trash" (onClick)="deleteThisPost()"></p-button>
+    </p-card>
+
+</div>

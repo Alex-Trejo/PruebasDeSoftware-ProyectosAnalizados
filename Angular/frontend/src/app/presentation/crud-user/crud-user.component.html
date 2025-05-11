@@ -1,0 +1,59 @@
+<div class="full-container">
+
+    <!-- Encabezado -->
+    <div class="header-container">
+        <p-button label="New User" icon="pi pi-user-plus" (onClick)="showDialogToAdd()"></p-button>
+        <h2 class="title">Users</h2>
+    </div>
+    
+    <!-- Contenedor de Usuarios -->
+    <div class="user-grid">
+        <div *ngFor="let user of users" class="user-card">
+            <div class=" button-container">
+                <app-user [user]="user" [editable]="true" (deleteUser)="deleteUser($event)" (editUser)="editUser($event)"></app-user>
+            </div>    
+        </div>
+    </div>
+    
+    <!-- Diálogo (Modal) para agregar o editar un usuario -->
+    <p-dialog header="Add new user" [modal]="true" [(visible)]="visible">
+        <div class="modal-content">
+            
+            <div class="field">
+                <p-floatlabel>
+                    <input pInputText id="username" type="text" autocomplete="off" [(ngModel)]="username" />
+                    <label for="username">
+                        <i class="pi pi-user"></i>
+                        Username
+                    </label>
+                </p-floatlabel>
+            </div>
+                
+            <div class="field">
+                <p-floatlabel>
+                    <input pInputText id="role" type="text" autocomplete="off" [(ngModel)]="role" />
+                    <label for="role">
+                        <i class="pi pi-key"></i>
+                        Role
+                    </label>
+                </p-floatlabel>
+            </div>
+                
+            <div class="field">
+                <p-floatlabel>
+                    <input pInputText id="password" type="password" autocomplete="off" [(ngModel)]="password" />
+                    <label for="password">
+                        <i class="pi pi-lock"></i>
+                        Password
+                    </label>
+                </p-floatlabel>
+            </div>
+            
+            <div class="button-container">
+                <p-button label="Save" icon="pi pi-save" (onClick)="saveUser()"></p-button>
+            </div>
+
+        </div>
+    </p-dialog>
+
+</div>
